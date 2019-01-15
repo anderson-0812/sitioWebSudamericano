@@ -43,7 +43,11 @@
     Author: BootstrapMade.com
     License: https://bootstrapmade.com/license/
   ======================================================= -->
-  
+  {% block css %}
+  {% endblock%}
+
+  {% block js %}
+  {% endblock%}
   
 	<title>{% block title %}{% endblock %}</title>
 </head>
@@ -53,7 +57,7 @@
   	
   	{% include 'div_animado.html' %}
 
-    {% block content %}
+    {% block content1 %}
     {% endblock %}
   	
 

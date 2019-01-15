@@ -128,4 +128,4 @@ STATICFILES_DIRS = (
 )
 
 # cuando el login sea true redirecciona a esta url
-LOGIN_REDIRECT_URL = '/' 
+LOGIN_REDIRECT_URL = '/admin/auth/user/' 
