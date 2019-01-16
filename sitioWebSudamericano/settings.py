@@ -127,5 +127,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+URL_BASE = '/'
+URL_ROOT = (
+    os.path.join(BASE_DIR, ""),
+)
+
 # cuando el login sea true redirecciona a esta url
-LOGIN_REDIRECT_URL = '/admin/auth/user/' 
+LOGIN_REDIRECT_URL = '/admin/' 
