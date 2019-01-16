@@ -4,17 +4,17 @@ from django.db import models
 class Exalumnos(models.Model):
 	id_exalumno = models.AutoField(primary_key=True)
 
-	cedula = models.CharField(max_length = 10, unique = True)
+	#cedula = models.CharField(max_length = 10, unique = True)
 	nombres = models.CharField(max_length=100,blank=False)
 	apellidos = models.CharField(max_length=100,blank=False)
-	telefono = models.IntegerField()
-	direccion = models.CharField(max_length=200,blank=False)
-	ciudad = models.CharField(max_length=100,blank=False)
-	SEX0_CHOICES = (
-			("M","Mujer"),
-			("H","Hombre")
-		)
-	sexo = models.CharField(max_length=1, choices = SEX0_CHOICES, default = "H")
+	#telefono = models.IntegerField()
+	#direccion = models.CharField(max_length=200,blank=False)
+	#ciudad = models.CharField(max_length=100,blank=False)
+	#SEX0_CHOICES = (
+	#		("M","Mujer"),
+	#		("H","Hombre")
+	#	)
+	#sexo = models.CharField(max_length=1, choices = SEX0_CHOICES, default = "H")
 
 	# cuando presenta  al usuario le va  amostrar estas referencias de los nombres
 	class Meta:
@@ -32,6 +32,7 @@ class Testimonios(models.Model):
 
 	# DE esta manera creo relacion de quemuchos testimonios hacen referencia a un alumno relacion de 1 a muchos
 	id_exalumno = models.ForeignKey(Exalumnos,on_delete = models.CASCADE)
+	testimonio = models.TextField();
 	video = models.CharField(max_length=255,blank =False)
 
 	class Meta:
