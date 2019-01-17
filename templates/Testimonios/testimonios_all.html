@@ -176,8 +176,9 @@
 	                {% for testi in exalu.testimonios_set.all %}
               		<div class="single-blog">
               		  <div class="single-blog-img">
+              		  <H4 >Testiomonio</H4>
               		    <a href="blog-details.html">
-                  			<iframe onload="var uri = this.getAttribute('src');uri = uri.split('https://www.youtube.com/watch?v=');if(uri.length >0){ uriFinal = 'https://www.youtube.com/embed/'+uri;};alert(uriFinal); this.setAttribute('src',uriFinal);setAttribute('onload','');"  width="560" height="315"  
+                  			<iframe onload="var uri = this.getAttribute('src');uri = uri.split('https://www.youtube.com/watch?v=');if(uri.length >0){ uriFinal = 'https://www.youtube.com/embed/'+uri;}; this.setAttribute('src',uriFinal);setAttribute('onload','');"  width="560" height="315"  
                   				src="{{ testi.video }}" poster="presentacion.jpg" controls>
                   			</iframe>
 						</a>
