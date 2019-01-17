@@ -187,12 +187,18 @@
 										</span>
                 </div>
                 <div class="blog-text">
-                  <h4>
-											<a href="#">Post my imagine Items</a>
-										</h4>
-                  <p>
-                    Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit.
-                  </p>
+                  {% if testimonios_all %}
+                  	{% for exalu in testimonios_all %}
+	                  	{% for testi in exalu.testimonios_set.all %}
+		                	<h4>
+
+								<a href="#">{{ exalu.nombres }} {{ exalu.apellidos }}</a>
+							</h4>
+							<p>{{ testi.testimonio }}</p><br>
+							<p>{{ testi.video }}</p>
+						{% endfor %}
+					{% endfor %}
+				  {% endif %}
                 </div>
                 <span>
 										<a href="blog-details.html" class="ready-btn">Read more</a>

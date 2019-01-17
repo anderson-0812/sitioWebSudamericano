@@ -27,7 +27,8 @@ def lista_testimonios(request):
 #cargamos todos los testimonios para ser vistos 
 def testimonios_all(request):
 
-	testimonios_all = Testimonios.objects.all();
+	#testimonios_all = Testimonios.objects.select_related('exalumnos');
+	testimonios_all = Exalumnos.objects.all();
 	template= loader.get_template('Testimonios/testimonios_all.html')
 	context = {
 		'testimonios_all': testimonios_all
