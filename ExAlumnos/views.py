@@ -23,3 +23,13 @@ def lista_testimonios(request):
 	}
 	return HttpResponse(template.render(context,request)) 
 				#envio al template 		datos 	tipo de peticion  
+
+#cargamos todos los testimonios para ser vistos 
+def testimonios_all(request):
+
+	testimonios_all = Testimonios.objects.all();
+	template= loader.get_template('Testimonios/testimonios_all.html')
+	context = {
+		'testimonios_all': testimonios_all
+	}
+	return HttpResponse(template.render(context,request))

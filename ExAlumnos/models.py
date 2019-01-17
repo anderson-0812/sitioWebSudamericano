@@ -24,8 +24,9 @@ class Exalumnos(models.Model):
 
 
 	def __str__(self):
-		return self
+		return self.nombres
 
+# Create your models here.
 class Testimonios(models.Model):
 	"""docstring for testimonios"""
 	id_testimonio = models.AutoField(primary_key = True)
@@ -41,4 +42,6 @@ class Testimonios(models.Model):
 		db_table = "testimonios"
 
 	def __str__(self):
-		return self
+		return self.testimonio
+
+

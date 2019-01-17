@@ -52,14 +52,22 @@
 	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+    {% block navTop %}
 
-  	{% include 'nav_top_main.html' %}
+  	 {% include 'nav_top_main.html' %}
   	
-  	{% include 'div_animado.html' %}
+    {% endblock %}
+
+    {% block nav_top %}
+  	 {% include 'div_animado.html' %}
+    {% endblock %}
 
     {% block content1 %}
     {% endblock %}
   	
+    {% block testimonios %}
+    {% endblock %}
+
 
 </body>
 </html>
