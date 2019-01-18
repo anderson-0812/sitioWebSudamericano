@@ -35,6 +35,9 @@ class Testimonios(models.Model):
 	id_exalumno = models.ForeignKey(Exalumnos,on_delete = models.CASCADE)
 	testimonio = models.TextField();
 	video = models.CharField(max_length=255,blank =False)
+	fecha_hora = models.DateTimeField(auto_now_add=True)
+	#hora_inicio = models.TimeField()
+    
 
 	class Meta:
 		verbose_name = "Testimonio"

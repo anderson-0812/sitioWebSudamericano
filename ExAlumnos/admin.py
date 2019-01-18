@@ -7,6 +7,7 @@ from .models import *
 class TestimoniosInline(admin.StackedInline):
 		model  = Testimonios
 		extra = 1
+		
 # Perzonalizacion exalumnos 
 class ExalumnosAdmin(admin.ModelAdmin):
 	inlines =[TestimoniosInline]
