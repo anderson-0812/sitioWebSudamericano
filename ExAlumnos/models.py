@@ -43,6 +43,9 @@ class Testimonios(models.Model):
 		verbose_name = "Testimonio"
 		verbose_name_plural = "testimonios"
 		db_table = "testimonios"
+		# sort by "fecha" in descending order unless
+        # overridden in the query with order_by()
+		ordering = ['-fecha_hora']
 
 	def __str__(self):
 		return self.testimonio

@@ -11,24 +11,23 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q # hacer operaciones con los modelos de mi db
 from .forms import * #importar lso forms
 
-# Create your views here.
-def index(request):
-	return render(request,"ExAlumnos/inicio_exalumnos.html")
 
-def lista_testimonios(request):
-	testimonios_list = Testimonios.objects.all()
+
+def index(request):
+	exAlumnos = Exalumnos.objects.all()
+	testimonios_list = Testimonios.objects.all()[:3]
 	template = loader.get_template('ExAlumnos/inicio_exalumnos.html') #hacemos un metodo de carga del template
 	context = {
 		'testimonios_list': testimonios_list
 	}
-	return HttpResponse(template.render(context,request)) 
+	return HttpResponse(template.render(context,request))
 				#envio al template 		datos 	tipo de peticion  
 
 #cargamos todos los testimonios para ser vistos 
 def testimonios_all(request):
 
 	#testimonios_all = Testimonios.objects.select_related('exalumnos');
-	testimonios_all = Exalumnos.objects.all();
+	testimonios_all = Exalumnos.objects.all()
 	template= loader.get_template('Testimonios/testimonios_all.html')
 	context = {
 		'testimonios_all': testimonios_all
