@@ -3,6 +3,12 @@
 
 {%  block testimonios %}
 
+<script type="text/javascript">
+	$( document ).ready(function() {
+    	$("#link_exalumnos").click();;
+	});
+</script>
+
 <!-- Start contenedor principal -->
 
 <div id="blog">
@@ -76,6 +82,31 @@
              		 </div>
 					{% endfor %}
 				{% endfor %}
+				<!-- Paginacion  -->
+					<div class="pagination">
+    					<span class="step-links">
+     					   {% if testimonios_all.has_previous %}
+     					   	<span class="ready-btn">
+     					   		
+        					    <a href="?page=1">&laquo;</a>
+        					    <a href="?page={{ testimonios_all.previous_page_number }}">Anterior</a>
+     					   	</span>
+        					{% endif %}
+
+       					 <span class="current">
+        					    Page {{ testimonios_all.number }} of {{ testimonios_all.paginator.num_pages }}.
+        					</span>
+
+       					 {% if testimonios_all.has_next %}
+       					 	<span class="ready-btn">
+       					 	
+       					     <a href="?page={{ testimonios_all.next_page_number }}">Siguiente</a>
+            				 <a href="?page={{ testimonios_all.paginator.num_pages }}"> &raquo;</a>
+       					 	</span>
+      					  {% endif %}
+  					  </span>
+					</div>
+					<!-- Fin Paginacion  -->
 			{% endif %}
             </div>
             
@@ -93,5 +124,3 @@
 
 
 {% endblock %}
-
-

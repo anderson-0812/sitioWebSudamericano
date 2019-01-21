@@ -11,6 +11,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q # hacer operaciones con los modelos de mi db
 from .forms import * #importar lso forms
 
+#paginador 
+from django.core.paginator import Paginator
+from django.shortcuts import render
+
+
 
 
 def index(request):
@@ -29,7 +34,12 @@ def testimonios_all(request):
 	#testimonios_all = Testimonios.objects.select_related('exalumnos');
 	testimonios_all = Exalumnos.objects.all()
 	template= loader.get_template('Testimonios/testimonios_all.html')
+
+	paginator = Paginator(testimonios_all, 2) # Show 2 testimonios por pagina
+	page = request.GET.get('page')
+	testimonios_todos = paginator.get_page(page)
+
 	context = {
-		'testimonios_all': testimonios_all
+		'testimonios_all': testimonios_todos
 	}
 	return HttpResponse(template.render(context,request))
