@@ -43,3 +43,24 @@ def testimonios_all(request):
 		'testimonios_all': testimonios_todos
 	}
 	return HttpResponse(template.render(context,request))
+
+
+# filtramoslos testimonios 
+def testimonios_filter(request):
+	buscar_testimonio = request.GET['buscar_testimonio'] #GET ES UN DICCIONARIO obyteemos el valor
+	print(buscar_testimonio)
+
+	testimonios_all = Exalumnos.objects.filter(nombres__icontains=buscar_testimonio)
+	
+		#testimonios_all = Testimonios.objects.select_related('exalumnos');
+	#testimonios_all = Exalumnos.objects.all()
+	template= loader.get_template('Testimonios/testimonios_all.html')
+
+	paginator = Paginator(testimonios_all, 2) # Show 2 testimonios por pagina
+	page = request.GET.get('page')
+	testimonios_todos = paginator.get_page(page)
+
+	context = {
+		'testimonios_all': testimonios_todos
+	}
+	return HttpResponse(template.render(context,request))

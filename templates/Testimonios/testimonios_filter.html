@@ -1,58 +1,6 @@
-{% extends 'base.html' %}
 {% load staticfiles %}
 
-{%  block testimonios %}
-
-<script type="text/javascript" src="{% static 'js/ajax.js' %}"></script>
-
-<script type="text/javascript">
-	$( document ).ready(function() {
-    	$("#link_exalumnos").click();
-
-	});
-</script>
-
-<!-- Start contenedor principal -->
-
-<div id="blog">
-
-  <div class="blog-page area-padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-          <div class="page-head-blog">
-            <div class="single-blog-page">
-              <!-- search option start -->
-              <form method="GET" action="/testimonios_filter" id="form_Buscar_testimonio">
-                {% csrf_token %}
-                <div class="search-option">
-                  <input id="buscar_testimonio" name="buscar_testimonio" type="text" placeholder="Search...">
-                  <button class="button" type="submit" id="btn_buscar_testimonio">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                </div>
-              </form>
-              <!-- search option end -->
-            </div>
-            <div class="single-blog-page">
-              <!-- recent start -->
-              <!-- recent end -->
-            </div>
-            <div class="single-blog-page">
-              
-            </div>
-            <div class="single-blog-page">
-              
-            </div>
-            <div class="single-blog-page">
-              
-            </div>
-          </div>
-        </div>
-        <!-- End left sidebar -->
-        <!-- Start single blog -->
-        <div  id="content_testimonios" class="col-md-8 col-sm-8 col-xs-12">
-          <div class="row">
+<div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
           	{% if testimonios_all %}
           		{% for exalu in testimonios_all %}
@@ -114,16 +62,3 @@
             </div>
             
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Blog Area -->
-
-  <div class="clearfix"></div>
-
-</div>
-<!-- End contenedor principal -->
-
-
-{% endblock %}
