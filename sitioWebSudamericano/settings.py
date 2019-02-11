@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ExAlumnos.apps.ExalumnosConfig',
     'Login.apps.LoginConfig',
+    'academia.apps.AcademiaConfig',
 ]
 
 MIDDLEWARE = [
@@ -114,7 +115,8 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+#USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
@@ -134,3 +136,6 @@ URL_ROOT = (
 
 # cuando el login sea true redirecciona a esta url
 LOGIN_REDIRECT_URL = '/admin/' 
+
+# doy formato de fechas
+DATE_INPUT_FORMATS = ('%d-%m-%Y',)
