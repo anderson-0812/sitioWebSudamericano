@@ -33,19 +33,19 @@ class ciclo(models.Model):
 class malla(models.Model):
 	nombre = models.CharField(max_length=255, blank = False)
 	descripcion = models.CharField(max_length=255, blank =False)
-	fechaHoraCreacion = models.DateTimeField(auto_now_add=True)
+	fecha_hora_creacion = models.DateTimeField(auto_now_add=True)
 	
 	#ESTADO_CHOICE = (
 	#		("Activo","1"),
 	#		("Desactivado","0")
 	#	)
-	isActiva = models.BooleanField(default= True)
+	es_activa = models.BooleanField(default= True)
 
 	#fecha_inicio = models.DateField(input_formats=settings.DATE_INPUT_FORMATS) #desde cuando se pone activa la malla 
-	fechaInicio = models.DateField(auto_now_add=True) #desde cuando se pone activa la malla 
+	fecha_inicio = models.DateField(auto_now_add=True) #desde cuando se pone activa la malla 
 	#fecha_fin = models.DateField(input_formats=settings.DATE_INPUT_FORMATS) # cuando culmina esta malla
-	fechaFin = models.DateField(auto_now_add=True) # cuando culmina esta malla
-	nroCiclos = models.CharField(max_length=2, blank = False)
+	fecha_fin = models.DateField(auto_now_add=True) # cuando culmina esta malla
+	nro_ciclos = models.CharField(max_length=2, blank = False)
 
 	# controla que malla esla actual en caso de q haya una malla vigente antigua pero las nuevas matriculas sean de otra malla 
 	#MALLA_ACTIVA_CHOICES = (
@@ -64,20 +64,20 @@ class malla(models.Model):
 
 # Materias 	para cada malla
 class materia(models.Model):
-	nombreMateria = models.CharField(max_length = 255)
+	nombre_materia = models.CharField(max_length = 255)
 	descripcion = models.CharField(max_length=255)
 	# para saber si tiene que consultar en alsotras tablas a ver cadena de que materias es
 	esCadena = models.BooleanField(default=True)
 	# para saber que matrias tienen q haber aprobado antes de poder tomar esta
-	tienePrerequisitos = models.BooleanField(default=False)
-	fechaHoraCreacion = models.DateTimeField(auto_now_add=True)
-	fechaHoraEdicion = models.DateTimeField(auto_now_add=True)
+	tiene_prerequisitos = models.BooleanField(default=False)
+	fecha_hora_creacion = models.DateTimeField(auto_now_add=True)
+	fecha_hora_edicion = models.DateTimeField(auto_now_add=True)
 
 	#MATERIA_EXTRAORDINARIO_CHOICE = (
 	#		("Si","1"),
 	#		("No","0")
 	#	)
-	isMateriaPeriodoExtraordinario = models.BooleanField(default = False)
+	es_materia_periodo_extraordinario = models.BooleanField(default = False)
 
 	class Meta:
 		verbose_name = "Materia"
@@ -90,9 +90,13 @@ class materia(models.Model):
 # relaciones
 # Materia - Malla - Ciclo de donde consulto que materia esta en que mallas y es dada en que ciclos
 class materia_malla_ciclo(models.Model):
-	idMateria = models.ForeignKey(materia,on_delete = models.CASCADE) # related_name='+', => Django no cree una relación hacia atrás, establezca related_name en '+' o finalícelo con '+'.
-	idMmalla = models.ForeignKey(malla,on_delete = models.CASCADE)
-	idCiclo = models.ForeignKey(malla,on_delete = models.CASCADE, related_name='ciclo')
+	#ojo le puse iden porque alponerle materia habia algun conflicto con laclase q tb se llama materia del fereing key
+	#id_materia
+	iden_materia = models.ForeignKey(materia,on_delete = models.CASCADE) # related_name='+', => Django no cree una relación hacia atrás, establezca related_name en '+' o finalícelo con '+'.
+	#id malla
+	iden_malla = models.ForeignKey(malla,on_delete = models.CASCADE)
+	#id ciclo
+	iden_ciclo = models.ForeignKey(malla,on_delete = models.CASCADE, related_name='mciclo') # la m hace referencia a la clase malla 
 	
 	class Meta:
 		verbose_name = "materia_malla_ciclo"
@@ -107,8 +111,9 @@ class materia_malla_ciclo(models.Model):
 # que sacara los datos de la materia Fundamentos de base de datos 1 que no constara en esta tabla ya que es cadena pero no 
 # necesita prerequisitos 
 class materia_prerequisito(models.Model):
-	idMateria = models.ForeignKey(materia,on_delete = models.CASCADE)
-	idMateriaMallaCicloAntecesora = models.ForeignKey(materia_malla_ciclo, on_delete = models.CASCADE)
+	#id materia
+	materia = models.ForeignKey(materia,on_delete = models.CASCADE)
+	materia_malla_ciclo_antecesora = models.ForeignKey(materia_malla_ciclo, on_delete = models.CASCADE)
 
 	class Meta:
 		verbose_name = "materia_prerequisito"
