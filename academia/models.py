@@ -90,7 +90,7 @@ class materia(models.Model):
 # relaciones
 # Materia - Malla - Ciclo de donde consulto que materia esta en que mallas y es dada en que ciclos
 class materia_malla_ciclo(models.Model):
-	#ojo le puse iden porque alponerle materia habia algun conflicto con laclase q tb se llama materia del fereing key
+	#ojo le puse iden porque alponerle materia habia algun conflicto con laclase q tb se llama materia del fereing ke
 	#id_materia
 	iden_materia = models.ForeignKey(materia,on_delete = models.CASCADE) # related_name='+', => Django no cree una relación hacia atrás, establezca related_name en '+' o finalícelo con '+'.
 	#id malla
