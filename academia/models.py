@@ -121,3 +121,18 @@ class materia_prerequisito(models.Model):
 		db_table = "materia_prerequisito"
 	def __str__(self):
 		return self.id_materia
+
+
+#registro fechas importantes de la universidad 
+class fecha_academica_importante(models.Model):
+ 	"""docstring for fecha_academica_importante"""
+ 	fecha_importante = models.DateField(auto_now_add=True) #desde cuando se pone activa la malla 
+ 	descripcion = models.CharField(max_length = 255)
+ 	fecha_creacion= models.DateField(auto_now_add = True)
+
+ 	class Meta:
+ 		verbose_name = "fecha_academica_importante"
+ 		verbose_name_plural = "fechas_academicas_importantes"
+ 		db_table = "fecha_academica_importante"
+ 	def __str__(self):
+ 		return self.descripcion

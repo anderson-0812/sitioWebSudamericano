@@ -1,7 +1,16 @@
+{% extends 'base.html'%}
+{% load staticfiles %}
 
-  {% load staticfiles %}
-  
 
+{% block academia %}
+	
+<script type="text/javascript" src="{% static 'js/ajax.js' %}"></script>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+      $("#link_academia").click();
+  });
+</script>
   <!-- Start portfolio Area -->
   <div id="portfolio" class="portfolio-area area-padding fix">
     <div class="container">
@@ -19,10 +28,10 @@
             <div class="awesome-menu ">
               <ul class="project-menu">
                 <li>
-                  <a href="/get_fechas_importantes_all" class="" data-filter="*">Fechas Academicas Importantes</a>
+                  <a href="#" class="" data-filter="*">Fechas Academicas Importantes</a>
                 </li>
                 <li>
-                  <a href="#" data-filter=".development">Informacion de la malla Curricular</a>
+                  <a href="#" data-filter=".development">Informcion de la malla Curricular</a>
                 </li>
                 <li>
                   <a href="#" data-filter=".design">Materias abiertas en período extraordinario</a>
@@ -42,7 +51,7 @@
                 <a href="#"><img src="{% static 'img/academia/fechas.jpg' %}" alt="" /></a>
                 <div class="add-actions text-center">
                   <div class="project-dec">
-                    <a class="venobox" data-gall="myGallery" href="/get_fechas_importantes_all">
+                    <a class="venobox" data-gall="myGallery" href="img/portfolio/1.jpg">
                       <h4>Fechas Academicas Importantes</h4>
                       <span>Sudamericano</span>
                     </a>
@@ -60,7 +69,7 @@
                 <div class="add-actions text-center">
                   <div class="project-dec">
                     <a class="venobox" data-gall="myGallery" href="img/portfolio/2.jpg">
-                      <h4>Informacion de la malla Curricular</h4>
+                      <h4>Informcion de la malla Curricular</h4>
                       <span>Sudamericano</span>
                     </a>
                   </div>
@@ -109,3 +118,4 @@
     </div>
   </div>
   <!-- awesome-portfolio end -->
+{% endblock %}
