@@ -27,3 +27,15 @@ def get_fechas_importantes_all(request):
 		'fechas_importantes_all': fechas_importantes_todos
 	}
 	return HttpResponse(template.render(context,request))
+
+
+# mostrar fechaimportante csegun id 
+def get_fecha_importante(request, id_fecha_importante):
+	fecha_importante = fecha_academica_importante.objects.get(id = id_fecha_importante)
+	#print(actividades)
+	template = loader.get_template("academia/fecha_importante_view.html") # es un directoriod e template
+	context = {
+		'fecha_importante':fecha_importante,
+	}
+
+	return HttpResponse(template.render(context,request))

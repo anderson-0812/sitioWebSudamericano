@@ -42,9 +42,9 @@ class malla(models.Model):
 	es_activa = models.BooleanField(default= True)
 
 	#fecha_inicio = models.DateField(input_formats=settings.DATE_INPUT_FORMATS) #desde cuando se pone activa la malla 
-	fecha_inicio = models.DateField(auto_now_add=True) #desde cuando se pone activa la malla 
+	fecha_inicio = models.DateField() #desde cuando se pone activa la malla 
 	#fecha_fin = models.DateField(input_formats=settings.DATE_INPUT_FORMATS) # cuando culmina esta malla
-	fecha_fin = models.DateField(auto_now_add=True) # cuando culmina esta malla
+	fecha_fin = models.DateField() # cuando culmina esta malla
 	nro_ciclos = models.CharField(max_length=2, blank = False)
 
 	# controla que malla esla actual en caso de q haya una malla vigente antigua pero las nuevas matriculas sean de otra malla 
@@ -126,7 +126,7 @@ class materia_prerequisito(models.Model):
 #registro fechas importantes de la universidad 
 class fecha_academica_importante(models.Model):
  	"""docstring for fecha_academica_importante"""
- 	fecha_importante = models.DateField(auto_now_add=True) #desde cuando se pone activa la malla 
+ 	fecha_importante = models.DateField() #desde cuando se pone activa la malla 
  	descripcion = models.CharField(max_length = 255)
  	fecha_creacion= models.DateField(auto_now_add = True)
 
