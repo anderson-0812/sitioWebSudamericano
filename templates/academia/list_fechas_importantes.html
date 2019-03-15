@@ -10,6 +10,7 @@
   $( document ).ready(function() {
       $("#link_academia").click();
   });
+
 </script>
   <!-- Start portfolio Area -->
   <div id="portfolio" class="portfolio-area area-padding fix">
@@ -26,23 +27,25 @@
         
         <div class="awesome-project-content">
           {% if fechas_importantes_all %}
+            {% for fechas in fechas_importantes_all %}
 
-            <!-- single-awesome-project start -->
-            <div class="col-md-3 col-sm-3 col-xs-12 design development">
-              <div class="single-awesome-project">
-                <div class="awesome-img">
-                  <a href="#"><img src="{% static 'img/academia/fechas.jpg' %}" alt="" /></a>
-                  <div class="add-actions text-center">
-                    <div class="project-dec">
-                      <a class="venobox" data-gall="myGallery" href="img/portfolio/1.jpg">
-                        <h4>Fechas Academicas Importantes</h4>
-                        <span>Sudamericano</span>
-                      </a>
+              <!-- single-awesome-project start -->
+              <div class="col-md-3 col-sm-3 col-xs-12 design development">
+                <div class="single-awesome-project">
+                  <div class="awesome-img">
+                    <a href="#"><img src="{% static 'img/academia/fechas.jpg' %}" alt="" /></a>
+                    <div class="add-actions text-center">
+                      <div class="project-dec">
+                        <a id="fechas" fechaid="{{ fechas.id }}" onclick="get_modal(event,{{ fechas.id }});" class="venobox" data-gall="myGallery" href="">
+                          <h4>{{ fechas.descripcion }}</h4>
+                          <span>Sudamericano</span>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            {% endfor %}
             <!-- single-awesome-project end -->
           {% else %}
             <div style="text-align:center;" class="col-md-12"><h2>No Hay Resultados </h2></div>
@@ -53,4 +56,37 @@
     </div>
   </div>
   <!-- awesome-portfolio end -->
+  <script type="text/javascript">
+       //alert("asdas");
+   $(document).ready(function(){
+   });    
+
+  //funcion para llamar a modal
+  function get_modal(event,fechaid){
+    event.preventDefault();
+    var uri = '{% url "get_fecha_importante" %}';
+    ;
+      console.log(uri);
+      console.log(fechaid);
+      console.log(event);
+   // var elemento = $(this).attr("fechaid");
+      //alert(event);
+      
+       $.ajax({
+                method: "get",
+                url: uri,
+                data: {
+                    "fechaid": fechaid
+                },
+                success: function (data) {
+                    if (data["encontrado"]) {
+                        alert('http://127.0.0.1:8000/evento/' + data["id"] + ' ' + data["nombre"]);
+                    } else {
+                        alert(data["message"]);
+                    }
+                }
+            });
+  }
+
+  </script>
 {% endblock %}

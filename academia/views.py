@@ -8,6 +8,8 @@ from django.template import loader # cargar los templates
 from django.http import HttpResponse, HttpResponseRedirect #responder al cluente, responder conuna redireccion
 
 
+def index(request):
+	return render(request,"")
 
 def get_fechas_importantes_all(request):
 	fechas_importantes_all = fecha_academica_importante.objects.all();
@@ -30,7 +32,8 @@ def get_fechas_importantes_all(request):
 
 
 # mostrar fechaimportante csegun id 
-def get_fecha_importante(request, id_fecha_importante):
+def get_fecha_importante(request):
+	id_fecha_importante = request.GET['fechaid'];
 	fecha_importante = fecha_academica_importante.objects.get(id = id_fecha_importante)
 	#print(actividades)
 	template = loader.get_template("academia/fecha_importante_view.html") # es un directoriod e template
