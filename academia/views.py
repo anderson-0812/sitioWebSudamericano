@@ -35,7 +35,7 @@ def get_fechas_importantes_all(request):
 def get_fecha_importante(request):
 	id_fecha_importante = request.GET['fechaid'];
 	fecha_importante = fecha_academica_importante.objects.get(id = id_fecha_importante)
-	#print(actividades)
+	print(fecha_importante)
 	template = loader.get_template("academia/fecha_importante_view.html") # es un directoriod e template
 	context = {
 		'fecha_importante':fecha_importante,

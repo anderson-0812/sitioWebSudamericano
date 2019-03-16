@@ -1,6 +1,20 @@
 {% extends 'base.html'%}
 {% load staticfiles %}
 
+<!-- Llamo al boostrap que necesito con los js para crear un popup -->
+{% block css %}
+  <!--
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  -->
+{% endblock%}
+{% block js %}
+  <!--
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  -->
+{% endblock%}
+<!-- Fin dela llamada de los css y js del popup -->
 
 {% block academia %}
 	
@@ -36,7 +50,7 @@
                     <a href="#"><img src="{% static 'img/academia/fechas.jpg' %}" alt="" /></a>
                     <div class="add-actions text-center">
                       <div class="project-dec">
-                        <a id="fechas" fechaid="{{ fechas.id }}" onclick="get_modal(event,{{ fechas.id }});" class="venobox" data-gall="myGallery" href="">
+                        <a id="fechas" fechaid="{{ fechas.id }}" onclick="get_modal(event,{{ fechas.id }});" class="venobox" data-gall="myGallery" href="" data-toggle="modal" data-target="#myModal">
                           <h4>{{ fechas.descripcion }}</h4>
                           <span>Sudamericano</span>
                         </a>
@@ -53,6 +67,13 @@
 
         </div>
       </div>
+      <!-- modal pop up fecha importante  -->
+      <div class="col-md-12"> 
+          <div class="modal fade" id="myModal" role="dialog">
+            <div id="content_popup"> </div>
+          </div>
+      </div>
+      <!-- Final modal pop up fecha importante  -->
     </div>
   </div>
   <!-- awesome-portfolio end -->
@@ -66,9 +87,6 @@
     event.preventDefault();
     var uri = '{% url "get_fecha_importante" %}';
     ;
-      console.log(uri);
-      console.log(fechaid);
-      console.log(event);
    // var elemento = $(this).attr("fechaid");
       //alert(event);
       
@@ -79,11 +97,7 @@
                     "fechaid": fechaid
                 },
                 success: function (data) {
-                    if (data["encontrado"]) {
-                        alert('http://127.0.0.1:8000/evento/' + data["id"] + ' ' + data["nombre"]);
-                    } else {
-                        alert(data["message"]);
-                    }
+                      document.getElementById("content_popup").innerHTML = data; 
                 }
             });
   }
