@@ -35,10 +35,30 @@ def get_fechas_importantes_all(request):
 def get_fecha_importante(request):
 	id_fecha_importante = request.GET['fechaid'];
 	fecha_importante = fecha_academica_importante.objects.get(id = id_fecha_importante)
-	print(fecha_importante)
 	template = loader.get_template("academia/fecha_importante_view.html") # es un directoriod e template
 	context = {
 		'fecha_importante':fecha_importante,
+	}
+
+	return HttpResponse(template.render(context,request))
+
+
+# MALLA CURRICULAR
+def get_malla_actual(request):
+	malla_actual = malla.objects.filter(isMallaActiva = True);
+	template = loader.get_template("academia/malla/malla_main.html");
+	context = {
+		'malla_actual':malla_actual,
+	}
+
+	return HttpResponse(template.render(context,request))
+
+def get_malla(request):
+	mallaid = request.GET['mallaid'] 
+	malla_actual = malla.objects.get(id = mallaid)
+	template = loader.get_template("academia/malla/malla_details.html")
+	context = {
+		'malla_actual':malla_actual,
 	}
 
 	return HttpResponse(template.render(context,request))

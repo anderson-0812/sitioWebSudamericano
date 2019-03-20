@@ -6,3 +6,4 @@ from .models import *
 
 	
 admin.site.register(fecha_academica_importante)	
+admin.site.register(malla)	
