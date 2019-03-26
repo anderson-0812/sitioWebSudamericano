@@ -62,3 +62,28 @@ def get_malla(request):
 	}
 
 	return HttpResponse(template.render(context,request))
+
+def get_info_malla_by_ciclo(request,mallaid):
+	ciclos = ciclo.objects.all();
+	#materia_malla_ciclos = materia_malla_ciclo.objects.select_related("materia").get(iden_malla = mallaid)
+
+	# llamo al metodo quemehace la consulta de la info de la malla
+	materia_malla_ciclos = get_consulta_malla_por_ciclo(mallaid)
+	malla_actual = malla.objects.get(id = mallaid)
+
+
+	context = {
+		'ciclos':ciclos,
+		'materia_malla_ciclo':materia_malla_ciclos,
+		'malla_actual':malla_actual
+	}
+	template = loader.get_template("academia/malla/list_malla_info.html")
+
+	return HttpResponse(template.render(context,request))
+
+# hago de esta manera la llamada del query para poder controlar cuando no hayan datos 
+def get_consulta_malla_por_ciclo(mallaid):
+	try:
+		return materia_malla_ciclo.objects.prefetch_related("materia").get(iden_malla = mallaid)
+	except 	materia_malla_ciclo.DoesNotExist:
+		return False

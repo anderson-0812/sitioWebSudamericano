@@ -1,0 +1,106 @@
+{% extends 'base.html'%}
+{% load staticfiles %}
+
+<!-- Llamo al boostrap que necesito con los js para crear un popup -->
+{% block css %}
+  <!--
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  -->
+{% endblock%}
+{% block js %}
+  <!--
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  -->
+{% endblock%}
+<!-- Fin dela llamada de los css y js del popup -->
+
+{% block academia %}
+	
+<script type="text/javascript" src="{% static 'js/ajax.js' %}"></script>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+      $("#link_academia").click();
+  });
+
+</script>
+  <!-- Start portfolio Area -->
+  <div id="portfolio" class="portfolio-area area-padding fix">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="section-headline text-center">
+            <h2>Desglose de la malla {{ malla_actual.nombre }}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Start Portfolio -page -->
+        
+        <div class="awesome-project-content">
+          {% if materia_malla_ciclo %}
+            {% for fechas in materia_malla_ciclo %}
+
+              <!-- single-awesome-project start -->
+              <div class="col-md-3 col-sm-3 col-xs-12 design development">
+                <div class="single-awesome-project">
+                  <div class="awesome-img">
+                    <a href="#"><img src="{% static 'img/academia/fechas.jpg' %}" alt="" /></a>
+                    <div class="add-actions text-center">
+                      <div class="project-dec">
+                        <a id="fechas" fechaid="{{ fechas.id }}" onclick="get_modal(event,{{ fechas.id }});" class="venobox" data-gall="myGallery" href="" data-toggle="modal" data-target="#myModal">
+                          <h4>{{ fechas.descripcion }}</h4>
+                          <span>Sudamericano</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            <!-- single-awesome-project end -->
+          {% else %}
+            <div style="text-align:center;" class="col-md-12"><h2>No Hay Resultados </h2></div>
+          {% endif %}
+
+        </div>
+      </div>
+      <!-- modal pop up fecha importante  -->
+      <div class="col-md-12"> 
+          <div class="modal fade" id="myModal" role="dialog">
+            <div id="content_popup"> </div>
+          </div>
+      </div>
+      <!-- Final modal pop up fecha importante  -->
+    </div>
+  </div>
+  <!-- awesome-portfolio end -->
+  <script type="text/javascript">
+       //alert("asdas");
+   $(document).ready(function(){
+   });    
+
+  //funcion para llamar a modal
+  function get_modal(event,fechaid){
+    event.preventDefault();
+    var uri = '{% url "get_fecha_importante" %}';
+    ;
+   // var elemento = $(this).attr("fechaid");
+      //alert(event);
+      
+       $.ajax({
+                method: "get",
+                url: uri,
+                data: {
+                    "fechaid": fechaid
+                },
+                success: function (data) {
+                      document.getElementById("content_popup").innerHTML = data; 
+                }
+            });
+  }
+
+  </script>
+{% endblock %}
